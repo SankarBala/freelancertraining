@@ -23,20 +23,11 @@
                             @error('name') <span class="pl-3 py-1 text-warning">{{ $message }}</span> @enderror
                             <select name="course_id" class="form-control">
                                 <option value="">Select A Course</option>
-                                <option value="1">Graphics Design</option>
-                                <option value="2">UX/UI Design</option>
-                                <option value="3">Wordpress Theme And Plugin Development</option>
-                                <option value="4">Mobile Application Development</option>
-                                <option value="5">Build Website And Customize</option>
-                                <option value="6">Frontend Web Development</option>
-                                <option value="7">Backend Web Development</option>
-                                <option value="8">Fullstack Web Development</option>
-                                <option value="9">Digital Marketing</option>
-                                <option value="10">Search Engine Optimization</option>
-                                <option value="11">Basic Office Application</option>
+                                @foreach ($courses as $course)
+                                    <option value="{{ $course->id }}">{{ $course->title }}</option>
+                                @endforeach
                             </select>
                         </div>
-
                         <div class="col-xl-12 col-md-12">
                             <br />
                             <span class="text-left">
@@ -59,7 +50,7 @@
                                     <span class="ml-2 mt-3 position-absolute text-warning">Night </span>
                                 </label>
                                 <label class="">
-                                    <input class="d-inline" style="width:20px" type="checkbox" name="time[]" value="any"
+                                    <input class="d-inline" style="width:20px" type="checkbox" name="time[]" value="anytime"
                                         checked />
                                     <span class="ml-2 mt-3 position-absolute text-warning">Anytime
                                     </span>
@@ -92,7 +83,7 @@
                                 </label>
                                 <label class="">
                                     <input class="d-inline" style="width:20px" type="checkbox" name="language[]"
-                                        value="any" />
+                                        value="all" />
                                     <span class="ml-2 mt-3 position-absolute text-light">Any
                                     </span>
                                 </label>
@@ -101,7 +92,7 @@
                         </div>
 
                         <div class="col-xl-12">
-                            <h4 class="text-center text-success">{{session('message')}}</h4><br/>
+                            <h4 class="text-center text-success">{{ session('message') }}</h4><br />
                             <button type="submit" class="btn btn-success">Enroll</button>
                         </div>
 

@@ -24,9 +24,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('/user', function () {
 
-    // return User::with('course')->find(4);
+    // return User::with('course')->find(1);
 
-    return Course::with('user')->find(5);
+    return User::with('membership')->find(1);
+
+    // return Course::with('user')->find(5);
 
 
 });

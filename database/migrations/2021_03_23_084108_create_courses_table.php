@@ -15,13 +15,14 @@ class CreateCoursesTable extends Migration
     {
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('shortname')->nullable();
+            $table->string('category')->nullable();
+            $table->string('title')->unique();
+            $table->string('slug')->nullable();
+            $table->string('description')->nullable();
+            $table->string('image')->nullable();
+            $table->string('rating')->nullable();
             $table->integer('price')->nullable();
             $table->string('status')->nullable();
-            $table->date('admission_going_to')->nullable();
-            $table->date('last_batch_class_started')->nullable();
-            $table->date('next_batch_class_start')->nullable();
             $table->timestamps();
         });
     }

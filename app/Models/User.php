@@ -19,6 +19,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'phone',
         'password',
     ];
 
@@ -41,7 +42,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function course(){
-        return $this->belongsToMany(Course::class, 'enrollments');
+    public function course()
+    {
+        return $this->belongsToMany(Course::class, 'enrollments')->withPivot('time', 'language')->withTimestamps();
+    }
+
+    public function membership()
+    {
+        return $this->hasMany(Membership::class);
     }
 }

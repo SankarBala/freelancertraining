@@ -17,7 +17,8 @@ class EnrollmentController extends Controller
      */
     public function index()
     {
-        return view('enrollment');
+        $courses = Course::all();
+        return view('enrollment')->withCourses($courses);
     }
 
     /**
@@ -45,22 +46,34 @@ class EnrollmentController extends Controller
             'language' => ['required', 'array', 'max:4', 'min:1']
         ]);
 
-        $enrolled = Enrollment::where('course_id', '=', $request->course_id)->where('user_id', '=', Auth::id())->get();
 
-        if ($enrolled->count() !== 0) {
-            $request->session()->flash('message', 'Enrollment edited successfully.');
-            $enrollment = Enrollment::find($enrolled[0]->id);
-        } else {
-            $enrollment = new Enrollment;
-            $request->session()->flash('message', 'You have successfully enrolled the course.');
-        }
+        $user = User::find(Auth::id());
 
-        $enrollment->user_id = Auth::id();
-        $enrollment->course_id = $request->course_id;
-        $enrollment->time = json_encode($request->time);
-        $enrollment->language = json_encode($request->language);
+        $user->course()->syncWithoutDetaching($request->course_id);
+        $user->course()->updateExistingPivot($request->course_id, [
+            'time' => json_encode($request->time),
+            'language' => json_encode($request->language)
+        ]);
 
-        $enrollment->save();
+
+        $request->session()->flash('message', 'Enrollment successfully updated');
+
+        // $enrolled = Enrollment::where('course_id', '=', $request->course_id)->where('user_id', '=', Auth::id())->get();
+
+        // if ($enrolled->count() !== 0) {
+        //     $request->session()->flash('message', 'Enrollment edited successfully.');
+        //     $enrollment = Enrollment::find($enrolled[0]->id);
+        // } else {
+        //     $enrollment = new Enrollment;
+        //     $request->session()->flash('message', 'You have successfully enrolled the course.');
+        // }
+
+        // $enrollment->user_id = Auth::id();
+        // $enrollment->course_id = $request->course_id;
+        // $enrollment->time = json_encode($request->time);
+        // $enrollment->language = json_encode($request->language);
+
+        // $enrollment->save();
 
 
         return redirect()->back();
@@ -72,7 +85,7 @@ class EnrollmentController extends Controller
      * @param  \App\Models\enrollment  $enrollment
      * @return \Illuminate\Http\Response
      */
-    public function show(enrollment $enrollment)
+    public function show($id)
     {
         //
     }
@@ -83,9 +96,9 @@ class EnrollmentController extends Controller
      * @param  \App\Models\enrollment  $enrollment
      * @return \Illuminate\Http\Response
      */
-    public function edit(enrollment $enrollment)
+    public function edit($id)
     {
-        //
+        // return 'e';
     }
 
     /**
@@ -106,8 +119,12 @@ class EnrollmentController extends Controller
      * @param  \App\Models\enrollment  $enrollment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(enrollment $enrollment)
+    public function destroy($id)
     {
-        //
+
+        $user = User::find(Auth::id());
+        $user->course()->detach($id);
+
+        return redirect()->route('dashboard.course');
     }
 }

@@ -23,7 +23,7 @@ class CourseFactory extends Factory
     {
         return [
             'name' => $this->faker->unique()->sentence($nbWords = 6, $variableNbWords = true),
-            'shortname' => $this->faker->word,
+            'slug' => $this->faker->word,
         ];
     }
 }

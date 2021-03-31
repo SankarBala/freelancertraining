@@ -36,7 +36,7 @@
                         {{-- <p>Our set he for firmament morning sixth subdue darkness creeping gathered divide our let god
                             moving. Moving in fourth air night bring upon you’re it beast let you dominion likeness open
                             place day great wherein heaven sixth lesser subdue fowl </p> --}}
-                        <a href="{{route('courses')}}" class="boxed_btn">Enroll a Course</a>
+                        <a href="{{ route('courses') }}" class="boxed_btn">Enroll a Course</a>
                     </div>
                 </div>
                 <div class="col-xl-6 offset-xl-1 col-lg-6">
@@ -73,6 +73,25 @@
         </div>
     </div>
     <!-- about_area_end -->
+
+
+
+    <div class="about_area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="single_about_info">
+                        <h3>See this video before</h3><br/>
+                        <iframe width="100%" height="650" src="{{env('YouTube_Iframe')}}"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <!-- popular_courses_start -->
     <div class="popular_courses">
@@ -345,5 +364,5 @@
     </div>
     <!-- our_courses_end -->
 
- 
+
 @endsection

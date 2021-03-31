@@ -78,8 +78,15 @@
                                                 href="{{ route('about') }}">About</a></li>
                                         <li><a class="{{ activeMenu('contact') }}"
                                                 href="{{ route('contact') }}">Contact</a></li>
+                                        @auth
+                                            <a href="{{ route('dashboard') }}"
+                                                class="text-white text-center border p-2 rounded">
+                                                Dashboard
+                                            </a>
+                                        @endauth
                                         @guest
-                                            <a href="{{ route('register') }}" class="text-white text-center border p-2 rounded">
+                                            <a href="{{ route('register') }}"
+                                                class="text-white text-center border p-2 rounded">
                                                 Register
                                             </a>
                                         @endguest

@@ -7,8 +7,8 @@
         <div class="popup_box ">
             <div class="popup_inner">
                 <div class="logo text-center">
-                    <a href="#">
-                        <img src="img/logo.png" alt="">
+                    <a href="{{ route('home') }}">
+                        <img src="img/logo.png" alt="freelancer training">
                     </a>
                 </div>
                 <h3>Register</h3>
@@ -22,6 +22,10 @@
                         @error('email') <span class="pl-3 py-1 text-warning">{{ $message }}</span> @enderror
                         <div class="col-xl-12 col-md-12">
                             <input name="email" type="email" placeholder="Enter your email address">
+                        </div>
+                        @error('phone') <span class="pl-3 py-1 text-warning">{{ $message }}</span> @enderror
+                        <div class="col-xl-12 col-md-12">
+                            <input name="phone" type="text" placeholder="Enter your phone number">
                         </div>
                         @error('password') <span class="pl-3 py-1 text-warning">{{ $message }}</span> @enderror
                         <div class="col-xl-12 col-md-12">

@@ -18,12 +18,13 @@
                 </div>
                 <div class="col-lg-8">
                     <form class="form-controll" action="{{ route('querySubmit') }}" method="post">
+                        @csrf
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <input class="form-control valid" name="name" id="name" type="text"
                                         onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your name'"
-                                        placeholder="Enter your name" value="{{old('name')}}"/>
+                                        placeholder="Enter your name" value="{{ old('name') }}" />
                                     @error('name') <span class="py-1 text-danger">{{ $message }}</span> @enderror
                                 </div>
                             </div>
@@ -31,7 +32,7 @@
                                 <div class="form-group">
                                     <input class="form-control valid" name="email" id="email" type="email"
                                         onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'"
-                                        placeholder="Email" value="{{old('email')}}"/>
+                                        placeholder="Email" value="{{ old('email') }}" />
                                     @error('email') <span class="py-1 text-danger">{{ $message }}</span> @enderror
                                 </div>
                             </div>
@@ -39,7 +40,7 @@
                                 <div class="form-group">
                                     <input class="form-control" name="subject" id="subject" type="text"
                                         onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Subject'"
-                                        placeholder="Enter Subject" value="{{old('subject')}}"/>
+                                        placeholder="Enter Subject" value="{{ old('subject') }}" />
                                     @error('subject') <span class="py-1 text-danger">{{ $message }}</span> @enderror
                                 </div>
                             </div>
@@ -47,7 +48,7 @@
                                 <div class="form-group">
                                     <textarea class="form-control w-100" name="message" id="message" cols="30" rows="9"
                                         onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Message'"
-                                        placeholder=" Name">{{old('message')}}</textarea>
+                                        placeholder=" Name">{{ old('message') }}</textarea>
                                     @error('message') <span class="py-1 text-danger">{{ $message }}</span> @enderror
                                 </div>
                             </div>
@@ -69,7 +70,7 @@
                     <div class="media contact-info">
                         <span class="contact-info__icon"><i class="ti-tablet"></i></span>
                         <div class="media-body">
-                            <h3>+88 01322-122356</h3>
+                            <h3>{{env('APP_PHONE') }}</h3>
                             <p>Sat to Fri 8am to 11pm</p>
                         </div>
                     </div>
