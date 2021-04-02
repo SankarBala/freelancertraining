@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Course;
 use Illuminate\Support\Str;
 use App\Models\User;
+use App\Models\Enrollment;
+use App\Models\Membership;
+use App\Models\QueryMessage;
+use App\Models\Subscription;
+
 
 
 
@@ -21,7 +26,16 @@ class AdminController extends Controller
     public function index()
     {
         $user = Auth::user();
-        return view('admin.dashboard')->withUser($user);
+        $enrollments = Enrollment::all();
+        $memberships = Membership::all();
+        $subscriptions = Subscription::all();
+        $queries = QueryMessage::all();
+
+        return view('admin.dashboard')->withUser($user)
+            ->withEnrollments($enrollments)
+            ->withMemberships($memberships)
+            ->withSubscriptions($subscriptions)
+            ->withQueries($queries);
     }
 
     public function courses()
@@ -90,7 +104,8 @@ class AdminController extends Controller
         return redirect()->route('admin.courses');
     }
 
-    public function users(){
+    public function users()
+    {
         $users = User::with('course')->with('membership')->get();
         return view('admin.users')->withUsers($users);
     }

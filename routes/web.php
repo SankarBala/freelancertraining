@@ -11,6 +11,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\TestController;
+use App\Models\Course;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +29,8 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('/courses', function () {
-    return view('courses');
+    $cources = Course::all();
+    return view('courses')->withCourses($cources);
 })->name('courses');
 
 Route::get('/contact', function () {
